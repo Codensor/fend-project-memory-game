@@ -99,3 +99,19 @@ $('.card').click(function() {
 });
 
 /* End Star Count */
+
+/* Restart Puzzle */
+
+$('.restart').click(function() {
+    $('.card').each(function() {
+        $(this).removeClass('match').removeClass('open').removeClass('show');
+    });
+    $('.stars i').each(function() {
+        $(this).removeClass();
+        $(this).addClass('fa').addClass('fa-star');
+    });
+    $('.moves').text(0);
+    stars = 0;
+});
+
+/* End Restart Puzzle */
