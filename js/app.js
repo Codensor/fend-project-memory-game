@@ -76,11 +76,12 @@ $('.card').click(function() {
                 console.log('second');
             } else {
                 $(this).toggleClass('open').toggleClass('show');
-                $('.card').removeClass('open').removeClass('show');
+                setTimeout(function() {$('.card').removeClass('open').removeClass('show');}, 400);
             }
-            c = 0;
+        c = 0;
         }
     }
 });
 
 /* End Matching Cards */
+
