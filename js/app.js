@@ -56,3 +56,31 @@ $('.card .fa').each(function() {
 });
 
 /* End Shuffle Cards */
+
+/* Matching Cards */
+
+let c = 0;
+let openCard;
+
+$('.card').click(function() {
+    if ((c < 2) && ($(this).hasClass('match') === false) && ($(this).hasClass('open') === false)) {
+        if (c === 0) {
+            $(this).toggleClass('open').toggleClass('show');
+            c = 1;
+            openCard = $(this).find('i').attr('class');
+            console.log('first');
+        } else {
+            if ($(this).find('i').attr('class') == openCard) {
+                $(this).toggleClass('open').toggleClass('show');
+                $('.open').toggleClass('open').toggleClass('show').toggleClass('match');
+                console.log('second');
+            } else {
+                $(this).toggleClass('open').toggleClass('show');
+                $('.card').removeClass('open').removeClass('show');
+            }
+            c = 0;
+        }
+    }
+});
+
+/* End Matching Cards */
