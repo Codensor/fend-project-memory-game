@@ -69,6 +69,7 @@ $('.card').click(function() {
             c = 1;
             openCard = $(this).find('i').attr('class');
             console.log('first');
+            stars++;
         } else {
             if ($(this).find('i').attr('class') == openCard) {
                 $(this).toggleClass('open').toggleClass('show');
@@ -79,9 +80,22 @@ $('.card').click(function() {
                 setTimeout(function() {$('.card').removeClass('open').removeClass('show');}, 400);
             }
         c = 0;
+        stars++;
         }
     }
 });
 
 /* End Matching Cards */
 
+/* Star Count */
+
+let stars = 0;
+
+$('.card').click(function() {
+    if (stars % 15 === 0 && stars < 45) {
+        $('.stars').find('.fa:first').removeClass();
+    }
+    $('.moves').text(stars);
+});
+
+/* End Star Count */
