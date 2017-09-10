@@ -100,6 +100,29 @@ $('.card').click(function() {
 
 /* End Star Count */
 
+/* Timer */
+
+let min = 0;
+let sec = 0;
+let time;
+let t = 0;
+
+$('.card').click(function() {
+    if (t === 0) {
+        time = setInterval(function(){
+            if(sec > 59) {
+                sec = 0;
+                min += 1;
+                $('.minutes').text(min);
+            }
+            $('.seconds').text(sec++);
+        }, 1000);
+        t = 1;
+    }
+});
+
+/* End Timer */
+
 /* Restart Puzzle */
 
 $('.restart').click(function() {
@@ -112,6 +135,13 @@ $('.restart').click(function() {
     });
     $('.moves').text(0);
     stars = 0;
+    $('.seconds').text('0');
+    $('.minutes').text('0');
+    clearInterval(time);
+    sec = 0;
+    min = 0;
+    t = 0;
 });
 
 /* End Restart Puzzle */
+
