@@ -107,3 +107,46 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/* Animations */
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+@keyframes rubber {
+  0% {transform: scale(1);}
+  30% {transform: scaleX(1.25) scaleY(0.75);}
+  40% {transform: scaleX(0.75) scaleY(1.25);}
+  60% {transform: scaleX(1.15) scaleY(0.85);}
+  100% {transform: scale(1);}
+}
+.rubber {
+  animation-name: rubber;
+}
+
+@keyframes wobble {
+  0% {transform: translateX(0%); background-color: red;}
+  15% {transform: translateX(-25%) rotate(-5deg); background-color: red;}
+  30% {transform: translateX(20%) rotate(3deg); background-color: red;}
+  45% {transform: translateX(-15%) rotate(-3deg); background-color: red;}
+  60% {transform: translateX(10%) rotate(2deg); background-color: red;}
+  75% {transform: translateX(-5%) rotate(-1deg); background-color: red;}
+  100% {transform: translateX(0%);}
+}
+.wobble {
+  animation-name: wobble;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
+}
+.bounce {
+  animation-name: bounce;
+}
+
+/* End Animations */

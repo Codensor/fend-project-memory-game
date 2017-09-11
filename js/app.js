@@ -71,27 +71,27 @@ let openCard;
 $('.card').click(function() {
     if ((c < 2) && ($(this).hasClass('match') === false) && ($(this).hasClass('open') === false)) {
         if (c === 0) {
-            $(this).toggleClass('open').toggleClass('show');
+            $(this).toggleClass('open').toggleClass('show').toggleClass('bounce');
             openCard = $(this).find('i').attr('class');
             c = 1;
             moves++;
         } else {
             if ($(this).find('i').attr('class') === openCard) {
-                $(this).toggleClass('open').toggleClass('show');
-                $('.open').toggleClass('open').toggleClass('show').toggleClass('match');
+                $(this).toggleClass('open').toggleClass('show').toggleClass('bounce');
+                $('.open').toggleClass('rubber').toggleClass('bounce').toggleClass('show').toggleClass('open').toggleClass('match');
                 win++;
                 c = 0;
             } else {
                 if(c === 1) {
                     c = 2;
-                    $(this).toggleClass('open').toggleClass('show');
-                    setTimeout(function() {$('.card').removeClass('open').removeClass('show'); c = 0;}, 400);
+                    $(this).toggleClass('open').toggleClass('show').toggleClass('bounce');
+                    $('.open').toggleClass('bounce').toggleClass('wobble');
+                    setTimeout(function() {$('.open').removeClass('open').removeClass('show').toggleClass('wobble'); c = 0;}, 400);
                 }
             }
         moves++;
         }
     }
-    console.log(c);
 });
 
 /* End Matching Cards */
@@ -138,7 +138,7 @@ $('.card').click(function() {
 
 function restart() {
     $('.card').each(function() {
-        $(this).removeClass('match').removeClass('open').removeClass('show');
+        $(this).removeClass('match').removeClass('open').removeClass('show').removeClass('rubber').removeClass('wobble');
     });
     $('.stars i').each(function() {
         $(this).removeClass();
@@ -154,6 +154,8 @@ function restart() {
     min = 0;
     t = 0;
     win = 0;
+    i = 0;
+    oldCards = [];
     mixCards();
 }
 
