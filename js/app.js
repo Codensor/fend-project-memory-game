@@ -42,17 +42,23 @@ function shuffle(array) {
 let oldCards = [];
 let i = 0
 
-$('.card .fa').each(function() {
-    oldCards[i++] = $(this).attr('class');
-});
+function mixCards() {
+    $('.card .fa').each(function() {
+        oldCards[i++] = $(this).attr('class');
+    });
 
-let newCards = shuffle(oldCards);
+    let newCards = shuffle(oldCards);
 
-i = 0;
+    i = 0;
 
-$('.card .fa').each(function() {
-    $(this).removeClass();
-    $(this).addClass(newCards[i++]);
+    $('.card .fa').each(function() {
+        $(this).removeClass();
+        $(this).addClass(newCards[i++]);
+    });
+}
+
+$(document).ready(function() {
+    mixCards();
 });
 
 /* End Shuffle Cards */
@@ -66,36 +72,41 @@ $('.card').click(function() {
     if ((c < 2) && ($(this).hasClass('match') === false) && ($(this).hasClass('open') === false)) {
         if (c === 0) {
             $(this).toggleClass('open').toggleClass('show');
-            c = 1;
             openCard = $(this).find('i').attr('class');
-            console.log('first');
-            stars++;
+            c = 1;
+            moves++;
         } else {
-            if ($(this).find('i').attr('class') == openCard) {
+            if ($(this).find('i').attr('class') === openCard) {
                 $(this).toggleClass('open').toggleClass('show');
                 $('.open').toggleClass('open').toggleClass('show').toggleClass('match');
-                console.log('second');
+                win++;
+                c = 0;
             } else {
-                $(this).toggleClass('open').toggleClass('show');
-                setTimeout(function() {$('.card').removeClass('open').removeClass('show');}, 400);
+                if(c === 1) {
+                    c = 2;
+                    $(this).toggleClass('open').toggleClass('show');
+                    setTimeout(function() {$('.card').removeClass('open').removeClass('show'); c = 0;}, 400);
+                }
             }
-        c = 0;
-        stars++;
+        moves++;
         }
     }
+    console.log(c);
 });
 
 /* End Matching Cards */
 
 /* Star Count */
 
-let stars = 0;
+let stars = 3;
+let moves = 0;
 
 $('.card').click(function() {
-    if (stars % 15 === 0 && stars < 45) {
+    if (moves % 20 === 0 && moves < 60) {
         $('.stars').find('.fa:first').removeClass();
+        stars--;
     }
-    $('.moves').text(stars);
+    $('.moves').text(moves);
 });
 
 /* End Star Count */
@@ -125,7 +136,7 @@ $('.card').click(function() {
 
 /* Restart Puzzle */
 
-$('.restart').click(function() {
+function restart() {
     $('.card').each(function() {
         $(this).removeClass('match').removeClass('open').removeClass('show');
     });
@@ -134,14 +145,45 @@ $('.restart').click(function() {
         $(this).addClass('fa').addClass('fa-star');
     });
     $('.moves').text(0);
-    stars = 0;
+    moves = 0;
+    stars = 3;
     $('.seconds').text('0');
     $('.minutes').text('0');
     clearInterval(time);
     sec = 0;
     min = 0;
     t = 0;
+    win = 0;
+    mixCards();
+}
+
+$('.restart').click(function() {
+    restart();
 });
 
 /* End Restart Puzzle */
 
+/* Game Win Message */
+
+let win = 0;
+
+function success() {
+    swal({
+        title: 'Congratulations! You Won!',
+        text: 'Achievements',
+        html: `Moves: ${moves}<br>Stars: ${stars}<br>Time: ${min} minutes ${sec} seconds`,
+        type: 'success',
+        confirmButtonText: 'Play again!',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        onClose: restart(),
+    });
+}
+
+$('.card').click(function() {
+    if (win === 8) {
+        setTimeout(function() {success();}, 500)
+    }
+});
+
+/* End Game Win Message */
