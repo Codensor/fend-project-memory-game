@@ -33,9 +33,7 @@ h1 {
     font-weight: 300;
 }
 
-/*
- * Styles for the deck of cards
- */
+/* Styles for the deck of cards */
 
 .deck {
     width: 660px;
@@ -81,14 +79,17 @@ h1 {
     font-size: 33px;
 }
 
-/*
- * Styles for the Score Panel
- */
+/* End Styles for the deck of cards */
+
+/* Styles for the Score Panel */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .score-panel .stars {
@@ -103,10 +104,19 @@ h1 {
     display: inline-block;
 }
 
+.score-panel .moves {
+  text-align: center;
+}
+
+.score-panel .timer {
+  text-align: center;
+}
+
 .score-panel .restart {
-    float: right;
     cursor: pointer;
 }
+
+/* End Styles for the Score Panel */
 
 /* Animations */
 

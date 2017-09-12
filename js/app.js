@@ -102,7 +102,7 @@ let stars = 3;
 let moves = 0;
 
 $('.card').click(function() {
-    if (moves % 20 === 0 && moves < 60) {
+    if (moves % 25 === 0 && moves < 75) {
         $('.stars').find('.fa:first').removeClass();
         stars--;
     }
